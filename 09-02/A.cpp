@@ -9,6 +9,7 @@
 #include <cstdio>
 
 #define MAX_SIZE 100+100+5
+#define EPS 1e-8
 
 using namespace std;
 
@@ -131,8 +132,7 @@ int main(){
   double x, y;
   int n, m, s, v;
 
-  while(cin.peek() != EOF && (cin >> n)){
-    cin >> m >> s >> v;
+  while(cin.peek() != EOF && cin >> n >> m >> s >> v){
 
     gophers.clear();
     holes.clear();
@@ -146,12 +146,14 @@ int main(){
     int source = n + m, target = n + m + 1;
     for(int i = 0; i < n; i++){ // gophers
       cin >> x >> y;
+
       gophers.push_back(Pos(x, y));
       graph[source][i] = 1; // source to gophers
       graph[i][source] = 1;
     }
     for(int j = 0; j < m; j++){ // holes
       cin >> x >> y;
+
       holes.push_back(Pos(x, y));
       graph[n + j][target] = 1; // holes to target
       graph[target][n + j] = 1;
@@ -160,9 +162,13 @@ int main(){
     double maxDist = v * s;
     for(int i = 0; i < n; i++){ // build graph (gophers to holes)
       for(int j = 0; j < m; j++){
-        if(gophers[i].getDistance(holes[j]) <= maxDist){
+        if(maxDist - gophers[i].getDistance(holes[j]) >= EPS){
           graph[i][n + j] = 1;
-          graph[n + j][i] = 1;
+          graph[n + j][i] = 0;
+        }
+        else{
+          graph[i][n + j] = 0;
+          graph[n + j][i] = 0;
         }
       }
     }
