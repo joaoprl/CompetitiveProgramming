@@ -40,7 +40,7 @@ int main(){
   int *mark = new int[N];
 
   cin >> c;
-  while(c-- && c > 0){
+  while(c--){
     cin >> n >> h;
     for(int i = 1; i <= n; i++){
       edges[i].clear();
