@@ -1,8 +1,11 @@
+// H. Função Binária
+// Change filename to Main.java and class name to Main
+
 import java.io.*;
 import java.util.Scanner;
 import java.math.BigInteger;
 
-public class Main {
+public class H {
   public static void main(String[] args) {
     Scanner s = null;
     s = new Scanner(System.in);
