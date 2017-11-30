@@ -1,1 +1,0 @@
-Solutions for some random problems @ codeforces
